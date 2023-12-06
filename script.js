@@ -1,9 +1,5 @@
 const booksWrapper = document.querySelector("#books-wrapper");
 const shoppingCart = document.querySelector("#shopping-cart");
-const skipMe = (event) => {
-    event.target.closest('.col').remove()
-}
-
 let outerBooks = [];
 let shoppingCartList = JSON.parse(localStorage.getItem("shoppingCart")) || [];
 
@@ -50,6 +46,9 @@ function displayBooks(books) {
   `;
     });
 }
+const skipMe = (event) => {
+    event.target.closest('.col').remove()
+}
 
 const addToCart = (event, asin) => {
     console.log(asin);
@@ -79,7 +78,7 @@ const loadShoppingCart = () => {
                   </p>
                   <div>
                       <div>
-                        <button class="btn btn-danger" onclick="deleteItem('${book.asin}')">Elimina </button>
+                        <button class="btn btn-danger">Scarta</button>
                       </div>
                   </div>
               </div >
@@ -88,14 +87,4 @@ const loadShoppingCart = () => {
     </div>
   `;
     });
-}
-function deleteItem(asin) {
-    const index = shoppingCartList.findIndex((book) => book.asin === asin);
-
-    if (index !== -1) {
-        shoppingCartList.splice(index, 1);
-        localStorage.setItem("shoppingCart", JSON.stringify(shoppingCartList))
-    }
-
-    loadShoppingCart();
 }
